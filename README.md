@@ -31,6 +31,25 @@ npm run dev
 
 Open `http://localhost:5173` and sign in with any demo account.
 
+
+## Tailwind CSS version note
+
+This project intentionally pins the Tailwind toolchain to older, broadly supported versions:
+
+- `tailwindcss@3.3.5`
+- `postcss@8.4.31`
+- `autoprefixer@10.4.16`
+
+If the portal looks like plain HTML, delete any existing install artifacts and reinstall from the project root:
+
+```bash
+rm -rf node_modules package-lock.json
+npm install
+npm run client:dev
+```
+
+Always open the app through Vite at `http://localhost:5173`; do not open `client/index.html` directly.
+
 ## Architecture diagram
 
 ```text
