@@ -1,0 +1,1 @@
+export default function ProgressBar({ value = 0 }) { const safe = Math.max(0, Math.min(100, Number(value) || 0)); return <div><div className="h-2 rounded bg-gray-200"><div className="h-2 rounded bg-blue-600" style={{ width: `${safe}%` }} /></div><p className="mt-1 text-xs text-gray-500">{safe}% progress</p></div>; }

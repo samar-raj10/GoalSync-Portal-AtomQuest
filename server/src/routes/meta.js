@@ -1,0 +1,10 @@
+const express = require('express');
+const Notification = require('../models/Notification');
+const User = require('../models/User');
+const { auth } = require('../middleware/auth');
+const router = express.Router();
+router.use(auth);
+router.get('/notifications', async (req, res) => res.json(await Notification.find({ user: req.user._id }).sort({ createdAt: -1 }).limit(20)));
+router.patch('/notifications/:id/read', async (req, res) => res.json(await Notification.findOneAndUpdate({ _id: req.params.id, user: req.user._id }, { read: true }, { new: true })));
+router.get('/users', async (req, res) => res.json(await User.find().select('-passwordHash').sort({ role: 1, name: 1 })));
+module.exports = router;
