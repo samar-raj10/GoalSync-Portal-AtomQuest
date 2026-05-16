@@ -1,0 +1,39 @@
+{
+  "name": "goalsync-portal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GoalSync Portal full-stack employee goal setting and quarterly tracking system.",
+  "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "nodemon server/src/index.js",
+    "server:start": "node server/src/index.js",
+    "client:dev": "vite --host 0.0.0.0 --config client/vite.config.js",
+    "client:build": "vite build --config client/vite.config.js",
+    "seed": "node server/src/seed.js"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "4.2.1",
+    "axios": "latest",
+    "bcryptjs": "latest",
+    "concurrently": "latest",
+    "cors": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "jsonwebtoken": "latest",
+    "mongoose": "latest",
+    "morgan": "latest",
+    "recharts": "latest",
+    "vite": "5.0.12",
+    "xlsx": "latest",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.30.1",
+    "tailwindcss": "3.3.5",
+    "postcss": "8.4.31",
+    "autoprefixer": "10.4.16",
+    "daisyui": "4.12.24"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
