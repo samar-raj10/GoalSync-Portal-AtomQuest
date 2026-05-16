@@ -1,7 +1,10 @@
-// PostCSS 8 config compatible with Tailwind CSS 3.3.x.
+const path = require('path');
+
+// Point Tailwind directly at the client config so Vite finds content paths
+// correctly even when commands are launched from the repository root.
 module.exports = {
   plugins: {
-    tailwindcss: {},
+    tailwindcss: { config: path.join(__dirname, 'tailwind.config.js') },
     autoprefixer: {}
   }
 };

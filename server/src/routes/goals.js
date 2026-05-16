@@ -10,13 +10,16 @@ const { validateGoalSheet } = require('../utils/goalValidation');
 const router = express.Router();
 router.use(auth);
 
-async function scopedGoals(user) {
+function scopedGoals(user) {
   if (user.role === 'admin') return Goal.find().populate('employee manager sharedGoal');
   if (user.role === 'manager') return Goal.find({ manager: user._id }).populate('employee manager sharedGoal');
   return Goal.find({ employee: user._id }).populate('employee manager sharedGoal');
 }
 
-router.get('/', async (req, res) => res.json(await scopedGoals(req.user).sort({ updatedAt: -1 })));
+router.get('/', async (req, res) => {
+  const goals = await scopedGoals(req.user).sort({ updatedAt: -1 });
+  res.json(goals);
+});
 
 router.post('/draft', permit('employee'), async (req, res) => {
   const current = await Goal.find({ employee: req.user._id, locked: false });
