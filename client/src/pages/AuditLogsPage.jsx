@@ -1,0 +1,10 @@
+import { useEffect, useState } from 'react';
+import api from '../utils/api';
+
+export default function AuditLogsPage(){
+  const [logs,setLogs]=useState([]); const [goals,setGoals]=useState([]); const [msg,setMsg]=useState('');
+  async function load(){ const [logRes, goalRes]=await Promise.all([api.get('/admin/audit-logs'), api.get('/goals')]); setLogs(logRes.data); setGoals(goalRes.data); }
+  useEffect(()=>{load();},[]);
+  async function unlock(id){ setMsg(''); await api.post(`/goals/${id}/unlock`); setMsg('Goal unlocked and audit log recorded.'); await load(); }
+  return <div className="space-y-6"><div><h2 className="text-2xl font-bold">Audit Logs</h2><p className="text-sm text-gray-500">Tracks post-lock changes including admin unlocks and manager check-in comments.</p></div>{msg&&<div className="rounded bg-blue-50 p-3 text-sm text-blue-800">{msg}</div>}<div className="card"><h3 className="font-semibold">Admin unlock controls</h3><div className="mt-3 grid gap-2 md:grid-cols-2">{goals.filter(g=>g.locked).map(g=><div className="flex items-center justify-between rounded border p-3" key={g._id}><div><p className="font-medium">{g.title}</p><p className="text-xs text-gray-500">{g.employee?.name} • {g.status}</p></div><button className="btn-secondary" onClick={()=>unlock(g._id)}>Unlock</button></div>)}</div></div><div className="overflow-x-auto rounded border bg-white"><table className="min-w-full text-sm"><thead className="bg-gray-50 text-left text-xs uppercase text-gray-500"><tr><th className="p-3">Timestamp</th><th className="p-3">Actor</th><th className="p-3">Entity</th><th className="p-3">Field</th><th className="p-3">Old</th><th className="p-3">New</th></tr></thead><tbody>{logs.map(log=><tr className="border-t" key={log._id}><td className="p-3">{new Date(log.createdAt).toLocaleString()}</td><td className="p-3">{log.actor?.name}</td><td className="p-3">{log.entity}</td><td className="p-3">{log.field}</td><td className="p-3">{log.oldValue}</td><td className="p-3">{log.newValue}</td></tr>)}</tbody></table></div></div>
+}
