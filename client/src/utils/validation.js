@@ -9,6 +9,14 @@ export function validateGoalSheet(goals) {
 }
 
 export function statusColor(status) {
-  const map = { approved: 'bg-green-100 text-green-800', submitted: 'bg-yellow-100 text-yellow-800', rejected: 'bg-red-100 text-red-800', draft: 'bg-gray-100 text-gray-800', Completed: 'bg-green-100 text-green-800', 'On Track': 'bg-blue-100 text-blue-800', 'Not Started': 'bg-gray-100 text-gray-800' };
-  return map[status] || 'bg-gray-100 text-gray-800';
+  const map = {
+    approved: 'badge-success',
+    submitted: 'badge-warning',
+    rejected: 'badge-error',
+    draft: 'badge-neutral',
+    Completed: 'badge-success',
+    'On Track': 'badge-info',
+    'Not Started': 'badge-ghost'
+  };
+  return map[status] || 'badge-ghost';
 }

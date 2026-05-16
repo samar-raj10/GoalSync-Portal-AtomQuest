@@ -16,7 +16,7 @@ A demo role switcher is visible in the sidebar after login. It switches between 
 
 ## Tech stack
 
-- Frontend: React, React Router, Context API, Tailwind CSS, Recharts, SheetJS
+- Frontend: React, React Router, Context API, DaisyUI, Tailwind build engine, Recharts, SheetJS
 - Backend: Node.js, Express.js, JWT auth, REST APIs
 - Database: MongoDB with Mongoose models
 
@@ -32,13 +32,9 @@ npm run dev
 Open `http://localhost:5173` and sign in with any demo account.
 
 
-## Tailwind CSS version note
+## UI styling note
 
-This project intentionally pins the Tailwind toolchain to older, broadly supported versions:
-
-- `tailwindcss@3.3.5`
-- `postcss@8.4.31`
-- `autoprefixer@10.4.16`
+The portal uses DaisyUI prebuilt component classes for the interface (`btn`, `card`, `table`, `badge`, `alert`, `select`, `input`, `drawer`, and `navbar`) with a simple `goalsync` theme. DaisyUI runs as a Tailwind plugin, so Tailwind remains only as the build engine for DaisyUI and light layout utilities.
 
 If the portal looks like plain HTML, delete any existing install artifacts and reinstall from the project root:
 
@@ -53,7 +49,7 @@ Always open the app through Vite at `http://localhost:5173`; do not open `client
 ## Architecture diagram
 
 ```text
-Browser (React + Tailwind + Router)
+Browser (React + DaisyUI + Router)
   |
   | JWT Bearer token REST calls
   v
